@@ -6,8 +6,8 @@
 #ifndef SERIAL_DMM_H_
 #define SERIAL_DMM_H_
 
-#include "dmm.h"
-#include "port.h"
+#include "dmm/dmm.h"
+#include "dmm/port.h"
 
 #include <string>
 

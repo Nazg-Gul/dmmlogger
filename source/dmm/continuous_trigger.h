@@ -6,7 +6,7 @@
 #ifndef CONTINUOUS_TRIGGER_H_
 #define CONTINUOUS_TRIGGER_H_
 
-#include "trigger.h"
+#include "dmm/trigger.h"
 
 // Trigger which sets on every update received from the multimeter.
 class ContinuousTrigger : public Trigger {

@@ -3,7 +3,7 @@
 //
 // Author: sergey.vfx@gmail.com (Sergey Sharybin)
 
-#include "settle_trigger.h"
+#include "dmm/settle_trigger.h"
 
 #include <cmath>
 
@@ -27,6 +27,8 @@ void SettleTrigger::Update(const DMMState &state) {
       action_ = WAIT_FOR_NO_DATA;
     } else if (!state.value_overflow) {
       if (!previous_state_.value_overflow) {
+        // Currently used stupid absolute delta, better make it
+        // so leats meaningful digit is allowed to jump a bit.
         if (previous_state_.multiplier == state.multiplier &&
             fabs(previous_state_.raw_value - state.raw_value) < 1e-4) {
           // For now wait for the same value displayed within 3 iterations,

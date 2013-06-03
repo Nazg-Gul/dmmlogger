@@ -3,7 +3,7 @@
 //
 // Author: sergey.vfx@gmail.com (Sergey Sharybin)
 
-#include "trigger.h"
+#include "dmm/trigger.h"
 
 Trigger::Trigger(void)
   : triggered_(false) {

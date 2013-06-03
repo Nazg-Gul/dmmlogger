@@ -42,13 +42,11 @@
 //   0x68                L
 //
 
-#include "ut60e.h"
+#include "dmm/ut60e.h"
 
-#include <sys/ioctl.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <cassert>
-
 
 UT60E::UT60E(const std::string &device)
   : SerialDMM(device) {
@@ -66,13 +64,9 @@ bool UT60E::Connect(void) {
    *
    * See http://perfec.to/ut60e/
    */
-
-  unsigned int mcr = 0;
-  ioctl(file_descriptor_, TIOCMGET, &mcr);
-  mcr &= ~TIOCM_RTS;
-  mcr |= TIOCM_DTR;
-  ioctl(file_descriptor_, TIOCMSET, &mcr);
-
+  if (!CommPortSetControl(file_descriptor_, true, false)) {
+    return false;
+  }
   return true;
 }
 
@@ -91,7 +85,7 @@ void DecodeValueFromBuffer(const unsigned char *buffer,
                             (0x0f & buffer[i + 1]);
     float digit;
     if (i != 1) {
-      read_dot |= (0x08 & buffer[i]) >> 3;
+      read_dot |= ((0x08 & buffer[i]) >> 3) != 0;
     }
     switch (encoded) {
       case 0x7d: digit = 0; break;
@@ -190,7 +184,6 @@ static bool DecodeBuffer(const unsigned char *buffer,
   if (state->mode == UNKNOWN_MODE) {
     return false;
   }
-
   return true;
 }
 

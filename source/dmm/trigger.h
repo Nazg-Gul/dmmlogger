@@ -6,7 +6,7 @@
 #ifndef TRIGGER_H_
 #define TRIGGER_H_
 
-#include "dmm.h"
+#include "dmm/dmm.h"
 
 class Trigger {
  public:

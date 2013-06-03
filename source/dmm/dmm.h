@@ -86,6 +86,7 @@ struct DMMState {
 // Basis mulstimeter descriptor.
 class DMM {
  public:
+  DMM(void);
   virtual ~DMM(void);
 
   // Connect to the multimeter.
@@ -100,9 +101,14 @@ class DMM {
   // Update multimeter state.
   bool Update(void);
 
+  // Request all current operations (such as reading) to stop.
+  void RequestStop(void);
  protected:
   // State of the multimeter.
   DMMState state_;
+
+  // Boolean flag indicating whether all current activities shall be stopped.
+  bool stop_requested_;
 
   // Read data from the multimeter and fill in new state.
   virtual bool ReadMultimeter(DMMState *state) = 0;

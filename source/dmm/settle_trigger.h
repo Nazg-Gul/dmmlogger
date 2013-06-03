@@ -6,7 +6,7 @@
 #ifndef SETTLE_TRIGGER_H_
 #define SETTLE_TRIGGER_H_
 
-#include "trigger.h"
+#include "dmm/trigger.h"
 
 // Trigger which sets when displaying value settled.
 class SettleTrigger : public Trigger {

@@ -3,16 +3,21 @@
 //
 // Author: sergey.vfx@gmail.com (Sergey Sharybin)
 
-#include "dmm.h"
+#include "dmm/dmm.h"
 
 #include <cassert>
+
+DMM::DMM(void)
+  : stop_requested_(false) {
+}
 
 DMM::~DMM(void) {
 }
 
 DMMState DMM::state(void) {
   // TODO(sergey): add thread locking here.
-  return state_;
+  DMMState temp_state = state_;
+  return temp_state;
 }
 
 bool DMM::Update(void) {
@@ -21,7 +26,9 @@ bool DMM::Update(void) {
    *
    * TODO(sergey): add thread locking here.
    */
-  DMMState new_state = state_;
+  DMMState new_state;
+  new_state = state_;
+
   bool result = ReadMultimeter(&new_state);
 
   if (result) {
@@ -33,6 +40,10 @@ bool DMM::Update(void) {
 
   // Failed to load new state.
   return false;
+}
+
+void DMM::RequestStop(void) {
+  stop_requested_ = true;
 }
 
 namespace {
@@ -91,9 +102,10 @@ const char *CurrentTypeStringify(CurrentType current_type) {
     return "AC";
   }
 
+  assert(current_type == DC);
+
   return "DC";
 }
-
 }  // namespace
 
 std::ostream& operator <<(std::ostream &os,

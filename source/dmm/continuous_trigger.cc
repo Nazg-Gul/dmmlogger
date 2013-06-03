@@ -3,7 +3,7 @@
 //
 // Author: sergey.vfx@gmail.com (Sergey Sharybin)
 
-#include "continuous_trigger.h"
+#include "dmm/continuous_trigger.h"
 
 void ContinuousTrigger::Update(const DMMState &state) {
   (void) state;  // ignored.

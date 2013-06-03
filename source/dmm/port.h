@@ -13,9 +13,14 @@
 void SleepMilliseconds(int milliseconds);
 
 // Value of invalid (unconnected) serial port descriptor.
-enum { COMM_PORT_INVALID };
-
+#if defined(__linux__)
+enum { COMM_PORT_INVALID = -1 };
 typedef int CommPortHandle;
+#elif defined(_WIN32)
+# include <windows.h>
+# define COMM_PORT_INVALID INVALID_HANDLE_VALUE
+typedef HANDLE CommPortHandle;
+#endif
 
 // Open COM port device for reading.
 // Port is opening in non-blocking mode.
@@ -28,6 +33,11 @@ CommPortHandle OpenCommPort(const char *device);
 int ReadCommPort(CommPortHandle comm_port,
                  unsigned char *buffer,
                  int count);
+
+// Set control lines, needed in some special cases.
+bool CommPortSetControl(CommPortHandle comm_port,
+                        bool control_dtr,
+                        bool control_rts);
 
 // Close COM port handle.
 void CloseCommPort(CommPortHandle comm_port);

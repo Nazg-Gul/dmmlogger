@@ -3,8 +3,7 @@
 //
 // Author: sergey.vfx@gmail.com (Sergey Sharybin)
 
-#include "serial_dmm.h"
-#include "port.h"
+#include "dmm/serial_dmm.h"
 
 #include <cassert>
 #include <cstdio>
@@ -30,7 +29,6 @@ bool SerialDMM::Connect(void) {
   if (file_descriptor_ == COMM_PORT_INVALID) {
     return false;
   }
-
   return true;
 }
 
@@ -62,6 +60,11 @@ int SerialDMM::ReadPort(unsigned char *buffer, int count) {
       return -1;
     }
 
+    if (stop_requested_) {
+      // All reading was requested to stop from another thread.
+      return -1;
+    }
+
     length = ReadCommPort(file_descriptor_, buffer, count);
 
     // If something was read return instantly,
@@ -70,6 +73,5 @@ int SerialDMM::ReadPort(unsigned char *buffer, int count) {
       SleepMilliseconds(10);
     }
   } while (length < 0);
-
   return length;
 }

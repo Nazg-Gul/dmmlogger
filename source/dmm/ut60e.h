@@ -6,7 +6,7 @@
 #ifndef UT60E_H_
 #define UT60E_H_
 
-#include "serial_dmm.h"
+#include "dmm/serial_dmm.h"
 
 // Uni-T UT60E multimeter descriptor.
 class UT60E : public SerialDMM {
