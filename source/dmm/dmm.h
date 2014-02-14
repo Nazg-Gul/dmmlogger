@@ -83,6 +83,12 @@ struct DMMState {
   bool relative;
 };
 
+enum Result {
+  RESULT_OK,
+  RESULT_PROTOCOL_ERROR,
+  RESULT_USER_ABORT,
+};
+
 // Basis mulstimeter descriptor.
 class DMM {
  public:
@@ -99,7 +105,7 @@ class DMM {
   DMMState state(void);
 
   // Update multimeter state.
-  bool Update(void);
+  Result Update(void);
 
   // Request all current operations (such as reading) to stop.
   void RequestStop(void);
@@ -111,8 +117,12 @@ class DMM {
   bool stop_requested_;
 
   // Read data from the multimeter and fill in new state.
-  virtual bool ReadMultimeter(DMMState *state) = 0;
+  virtual Result ReadMultimeter(DMMState *state) = 0;
 };
+
+const char *UnitsFromMode(Mode mode);
+const char *MultiplierStringify(Multiplier multiplier);
+const char *CurrentTypeStringify(CurrentType current_type);
 
 // A human-readable representation of the multimeter state.
 std::ostream& operator <<(std::ostream &os,

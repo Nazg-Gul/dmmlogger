@@ -20,3 +20,4 @@ include_directories(.)
 
 add_subdirectory(dmm)
 add_subdirectory(tools)
+add_subdirectory(ui)

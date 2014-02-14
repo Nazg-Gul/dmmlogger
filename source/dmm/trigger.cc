@@ -6,7 +6,7 @@
 #include "dmm/trigger.h"
 
 Trigger::Trigger(void)
-  : triggered_(false) {
+    : triggered_(false) {
 }
 
 Trigger::~Trigger(void) {

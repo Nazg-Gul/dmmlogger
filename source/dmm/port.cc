@@ -157,6 +157,6 @@ bool CommPortSetControl(CommPortHandle comm_port,
 }
 
 void CloseCommPort(CommPortHandle comm_port) {
-   CloseHandle(comm_port);
+  CloseHandle(comm_port);
 }
 #endif

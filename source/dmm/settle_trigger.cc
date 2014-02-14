@@ -8,7 +8,7 @@
 #include <cmath>
 
 SettleTrigger::SettleTrigger(void)
-  : action_(WAIT_FOR_NO_DATA) {
+    : action_(WAIT_FOR_NO_DATA) {
 }
 
 void SettleTrigger::Update(const DMMState &state) {

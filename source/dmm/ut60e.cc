@@ -49,7 +49,7 @@
 #include <cassert>
 
 UT60E::UT60E(const std::string &device)
-  : SerialDMM(device) {
+    : SerialDMM(device) {
 }
 
 bool UT60E::Connect(void) {
@@ -187,7 +187,7 @@ static bool DecodeBuffer(const unsigned char *buffer,
   return true;
 }
 
-bool UT60E::ReadMultimeter(DMMState *state) {
+Result UT60E::ReadMultimeter(DMMState *state) {
   unsigned char buffer[14];
   int length = 0;
 
@@ -206,7 +206,7 @@ bool UT60E::ReadMultimeter(DMMState *state) {
        *               which will indicate whether we
        *               need to break cycle here and exit.
        */
-      return false;
+      return RESULT_USER_ABORT;
     }
 
     if (length == 0) {
@@ -228,7 +228,7 @@ bool UT60E::ReadMultimeter(DMMState *state) {
   // Ensure all the frames are here.
   for (unsigned int i = 0; i < sizeof(buffer); i++) {
     if (SEQUENCE_ID(buffer[i]) != i + 1) {
-      return false;
+      return RESULT_PROTOCOL_ERROR;
     }
   }
 #undef SEQUENCE_ID
@@ -236,5 +236,8 @@ bool UT60E::ReadMultimeter(DMMState *state) {
   /* Now we've got all the frames in correct order,
    * so we could safely decode all of them.
    */
-  return DecodeBuffer(buffer, state);
+  if (!DecodeBuffer(buffer, state)) {
+    return RESULT_PROTOCOL_ERROR;
+  }
+  return RESULT_OK;
 }

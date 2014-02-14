@@ -8,7 +8,7 @@
 #include <cassert>
 
 DMM::DMM(void)
-  : stop_requested_(false) {
+    : stop_requested_(false) {
 }
 
 DMM::~DMM(void) {
@@ -20,7 +20,7 @@ DMMState DMM::state(void) {
   return temp_state;
 }
 
-bool DMM::Update(void) {
+Result DMM::Update(void) {
   /* Use current state as reference. This is so because multimeter protocol
    * could send incremental changes instead of sending the whole state.
    *
@@ -29,24 +29,22 @@ bool DMM::Update(void) {
   DMMState new_state;
   new_state = state_;
 
-  bool result = ReadMultimeter(&new_state);
+  Result result = ReadMultimeter(&new_state);
 
-  if (result) {
+  if (result == RESULT_OK) {
     // Update current sttaus with new one.
     // TODO(sergey): add thread locking here.
     state_ = new_state;
-    return true;
   }
 
   // Failed to load new state.
-  return false;
+  return result;
 }
 
 void DMM::RequestStop(void) {
   stop_requested_ = true;
 }
 
-namespace {
 const char *UnitsFromMode(Mode mode) {
   switch (mode) {
     case UNKNOWN_MODE:
@@ -106,7 +104,6 @@ const char *CurrentTypeStringify(CurrentType current_type) {
 
   return "DC";
 }
-}  // namespace
 
 std::ostream& operator <<(std::ostream &os,
                           const DMMState &state) {

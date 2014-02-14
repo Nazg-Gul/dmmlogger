@@ -17,8 +17,8 @@ void SleepMilliseconds(int milliseconds);
 enum { COMM_PORT_INVALID = -1 };
 typedef int CommPortHandle;
 #elif defined(_WIN32)
-# include <windows.h>
-# define COMM_PORT_INVALID INVALID_HANDLE_VALUE
+#  include <windows.h>
+#  define COMM_PORT_INVALID INVALID_HANDLE_VALUE
 typedef HANDLE CommPortHandle;
 #endif
 

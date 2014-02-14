@@ -11,8 +11,8 @@
 #include <cstdlib>
 
 SerialDMM::SerialDMM(const std::string &device)
-  : device_(device),
-    file_descriptor_(COMM_PORT_INVALID) {
+    : device_(device),
+      file_descriptor_(COMM_PORT_INVALID) {
 }
 
 SerialDMM::~SerialDMM(void) {

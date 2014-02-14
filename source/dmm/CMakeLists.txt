@@ -6,6 +6,7 @@
 set(SRC
     continuous_trigger.cc
     dmm.cc
+    dummy_dmm.cc
     port.cc
     serial_dmm.cc
     settle_trigger.cc
@@ -15,6 +16,7 @@ set(SRC
 set(HDR
     continuous_trigger.h
     dmm.h
+    dummy_dmm.h
     port.h
     serial_dmm.h
     settle_trigger.h

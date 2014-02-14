@@ -13,7 +13,7 @@
 #include "dmm/continuous_trigger.h"
 
 #if defined(__linux__)
-# include <signal.h>
+#  include <signal.h>
 #endif
 
 namespace {
@@ -25,7 +25,7 @@ void PrintUsage(const char *argv0) {
           "Usage: %s --device <serial_device_name> [--trigger <trigger>]\n",
           argv0);
   fprintf(stderr, "Supported triggers: continous, settle\n");
-  fprintf(stderr, "\nNOTE: Currently onlu UT60E multimeter is supported.\n");
+  fprintf(stderr, "\nNOTE: Currently only UT60E multimeter is supported.\n");
 }
 
 void PrintUsageAndExit(const char *argv0) {

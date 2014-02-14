@@ -3,20 +3,20 @@
 //
 // Author: sergey.vfx@gmail.com (Sergey Sharybin)
 
-#ifndef UT60E_H_
-#define UT60E_H_
+#ifndef DUMMY_DMM_H_
+#define DUMMY_DMM_H_
 
-#include "dmm/serial_dmm.h"
+#include "dmm/dmm.h"
+#include "dmm/port.h"
 
-// Uni-T UT60E multimeter descriptor.
-class UT60E : public SerialDMM {
+#include <string>
+
+class DummyDMM : public DMM {
  public:
-  explicit UT60E(const std::string &device);
-
   bool Connect(void);
+  void Disconnect(void);
 
- protected:
-  // Read the multimeter to the new state.
+ private:
   Result ReadMultimeter(DMMState *state);
 };
 
