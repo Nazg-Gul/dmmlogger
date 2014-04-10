@@ -73,8 +73,8 @@ void MainWindow::HandleTimer(void) {
 
 void MainWindow::ConnectToDMM(void) {
   assert(dmm_ == NULL);
-  // dmm_ = new UT60E("/dev/ttyUSB0");
-  dmm_ = new DummyDMM();
+  dmm_ = new UT60E("/dev/ttyUSB0");
+  // dmm_ = new DummyDMM();
   if (!dmm_->Connect()) {
     // Error happened while connecting to the DMM.
     // TODO(sergey): Show error message.

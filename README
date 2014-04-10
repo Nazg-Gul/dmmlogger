@@ -1,0 +1,55 @@
+dmmlogger - logger for the digital multimeters
+==============================================
+
+dmmlogger is a simple-to use application to log
+readings from your digital multimeter.
+
+It is not ready yet. If you're interested in contributing, see:
+
+  https://github.com/Nazg-Gul/dmmlogger
+
+The short story:
+
+ $ git https://github.com/Nazg-Gul/dmmlogger
+ $ make
+ $ bin-opt/bin/qt-dmmlogger
+
+Building
+--------
+
+Before building, make sure you have the following:
+
+* CMake 2.4 or newer.
+* Qt4.
+
+Then run 
+
+ $ make
+
+Supported DMM models
+--------------------
+
+Currently only UT-60E multimeter on ttyUSB0 is supported.
+
+Limitation of the port is caused by the lack of configuration
+interface and would be solved soon, but other DMM models would
+requre the community work since I don't have other multimeters
+with the serial interface at this moment.
+
+Supported triggers
+------------------
+
+Different triggers are supported by the logger:
+
+* Continous trigger will trigger the logger every time the
+  multimeter sends new data to the computer.
+
+* Settle trigger will wait the reading to settle before
+  logging the value to the graph.
+
+Currently no configuration interface for this is ready as well.
+
+Problems
+--------
+
+If you encounter problems, please mail the branch author.
