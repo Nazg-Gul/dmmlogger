@@ -1,1 +1,25 @@
+# generic files to ignore
+.*
+
+# editors
+*~
+*.swp
+*.swo
+*#
+
+# QtCreator
+CMakeLists.txt.user
+
+# ms-windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# local patches
+/*.patch
+/*.diff
+
+# build directories
 build
+bin-dbg
+bin-opt
