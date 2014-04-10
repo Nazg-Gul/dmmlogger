@@ -6,6 +6,8 @@
 find_package(Qt4 REQUIRED)
 include(${QT_USE_FILE})
 
+INCLUDE_DIRECTORIES(../third_party)
+
 SET(SRC
     graph_widget.cc
     main.cc
@@ -14,11 +16,11 @@ SET(SRC
     reader_thread.cc)
 
 QT4_WRAP_CPP(SRC
-             graph_widget.h
              main_window.h)
 QT4_ADD_RESOURCES(SRC dmmlogger.qrc)
 
 add_executable(qt-dmmlogger ${SRC})
 target_link_libraries(qt-dmmlogger
+                      qcustomplot
                       dmm
                       ${QT_LIBRARIES})

@@ -6,22 +6,19 @@
 #ifndef UI_GRAPH_WIDGET_H_
 #define UI_GRAPH_WIDGET_H_
 
-#include <vector>
-#include <QWidget>
+#include <QVector>
 
-class GraphWidget : public QWidget {
-  Q_OBJECT
+#include "qcustomplot/qcustomplot.h"
 
+class GraphWidget : public QCustomPlot {
  public:
-  explicit GraphWidget(QWidget *parent = 0);
+  GraphWidget(void);
 
   void Clear(void);
   void AddValue(float value);
 
  protected:
-  void paintEvent(QPaintEvent *event);
-
-  std::vector<float> values_;
+  float x_;
 };
 
 #endif

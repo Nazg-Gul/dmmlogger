@@ -19,8 +19,7 @@
 #include <stdio.h>
 
 MainWindow::MainWindow(void)
-    : dmm_(NULL),
-      graph_pixmap_(320, 240) {
+    : dmm_(NULL) {
   connect(&timer_, SIGNAL(timeout()), SLOT(HandleTimer()));
 
   setWindowTitle("DMM Logger");
@@ -28,12 +27,12 @@ MainWindow::MainWindow(void)
 
   QToolBar *toolbar = addToolBar("Main Toolbar");
 
-  QAction *connect_action =
+  connect_action_ =
       toolbar->addAction(QIcon(":/connect"),
                          "Connect",
                          this,
                          SLOT(ToggleConnection(bool /* connect */)));
-  connect_action->setCheckable(true);
+  connect_action_->setCheckable(true);
 
   QWidget *central_widget = CreateCentralWidget();
   setCentralWidget(central_widget);
@@ -51,6 +50,9 @@ MainWindow::~MainWindow(void) {
 void MainWindow::ToggleConnection(bool connect) {
   if (connect) {
     ConnectToDMM();
+    if (dmm_ == NULL) {
+      connect_action_->setChecked(false);
+    }
   } else {
     DisconnectFromDMM();
   }

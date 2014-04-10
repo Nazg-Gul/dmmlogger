@@ -6,16 +6,15 @@
 #ifndef UI_MAIN_H_
 #define UI_MAIN_H_
 
+#include <QAction>
 #include <QLabel>
 #include <QMainWindow>
-#include <QPixmap>
 #include <QTableWidget>
 #include <QTimer>
 #include <QWidget>
 
 #include "dmm/dmm.h"
 #include "dmm/trigger.h"
-
 #include "ui/graph_widget.h"
 #include "ui/reader_thread.h"
 
@@ -42,9 +41,9 @@ class MainWindow : public QMainWindow {
   ReaderThread *reader_thread_;
 
   QLabel *value_display_label_;
+  QAction *connect_action_;
   GraphWidget *graph_display_;
   QTableWidget *values_table_;
   QTimer timer_;
-  QPixmap graph_pixmap_;
 };
 #endif
