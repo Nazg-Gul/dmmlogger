@@ -53,3 +53,15 @@ Problems
 --------
 
 If you encounter problems, please mail the branch author.
+
+License
+-------
+
+The code of dmmlogger itself is licensed by the GPLv2+ license
+(which you'll find in the COPYING file), but it also uses some
+third party code which might have different licenses:
+
+* miniglog uses BSD license
+* QCustomPlot uses GPLv3 license
+
+This makes the final package be licensed by GPLv3 license.
