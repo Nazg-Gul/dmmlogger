@@ -22,7 +22,7 @@ Before building, make sure you have the following:
 * CMake 2.4 or newer.
 * Qt4.
 
-Then run 
+Then run:
 
  $ make
 
@@ -31,10 +31,8 @@ Supported DMM models
 
 Currently only UT-60E multimeter on ttyUSB0 is supported.
 
-Limitation of the port is caused by the lack of configuration
-interface and would be solved soon, but other DMM models would
-requre the community work since I don't have other multimeters
-with the serial interface at this moment.
+Other DMM models would requre the community work since I don't
+have other multimeters with the serial interface at this moment.
 
 Supported triggers
 ------------------
