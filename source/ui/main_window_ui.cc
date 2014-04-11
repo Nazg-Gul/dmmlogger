@@ -6,8 +6,39 @@
 #include "ui/main_window.h"
 
 #include <QFrame>
+#include <QToolBar>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+
+void MainWindow::CreateToolBar(void) {
+  // Create tool bar itself.
+  QToolBar *toolbar = addToolBar("Main Toolbar");
+
+  // Drop-down list for the device selection.
+  device_chooser_ = new QComboBox();
+  toolbar->addWidget(device_chooser_);
+  device_chooser_->setEditable(true);
+
+  // TODO(sergey): Need to support other platforms here?
+#ifndef WIN32
+  device_chooser_->setEditText("/dev/ttyUSB0");
+  device_chooser_->setMinimumContentsLength(12);
+#else
+  device_chooser_->setEditText("COM1");
+  device_chooser_->setMinimumContentsLength(6);
+#endif
+
+  // TODO(sergey): Fill in the combo box with more choises.
+  // TODO(sergey): Also support saving the last used device.
+
+  // Connect to the device button.
+  connect_action_ =
+      toolbar->addAction(QIcon(":/connect"),
+                         "Connect",
+                         this,
+                         SLOT(ToggleConnection(bool /* connect */)));
+  connect_action_->setCheckable(true);
+}
 
 QWidget *MainWindow::CreateCentralWidget(void) {
   //

@@ -8,7 +8,6 @@
 #include <cassert>
 #include <QAction>
 #include <QPainter>
-#include <QToolBar>
 
 #include "dmm/dummy_dmm.h"
 #include "dmm/ut60e.h"
@@ -25,14 +24,7 @@ MainWindow::MainWindow(void)
   setWindowTitle("DMM Logger");
   setMinimumSize(320, 240);
 
-  QToolBar *toolbar = addToolBar("Main Toolbar");
-
-  connect_action_ =
-      toolbar->addAction(QIcon(":/connect"),
-                         "Connect",
-                         this,
-                         SLOT(ToggleConnection(bool /* connect */)));
-  connect_action_->setCheckable(true);
+  CreateToolBar();
 
   QWidget *central_widget = CreateCentralWidget();
   setCentralWidget(central_widget);
@@ -73,7 +65,8 @@ void MainWindow::HandleTimer(void) {
 
 void MainWindow::ConnectToDMM(void) {
   assert(dmm_ == NULL);
-  dmm_ = new UT60E("/dev/ttyUSB0");
+  dmm_ = new UT60E(device_chooser_->currentText().toStdString());
+
   // dmm_ = new DummyDMM();
   if (!dmm_->Connect()) {
     // Error happened while connecting to the DMM.

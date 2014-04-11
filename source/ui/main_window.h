@@ -7,6 +7,7 @@
 #define UI_MAIN_H_
 
 #include <QAction>
+#include <QComboBox>
 #include <QLabel>
 #include <QMainWindow>
 #include <QTableWidget>
@@ -29,21 +30,28 @@ class MainWindow : public QMainWindow {
   void HandleTimer(void);
 
  private:
+  void CreateToolBar(void);
   QWidget *CreateCentralWidget(void);
+
   void ConnectToDMM(void);
   void DisconnectFromDMM(void);
   void UpdateDisplay(const DMMState &state);
   void UpdateGraph(void);
   void LogState(const DMMState &state);
 
+  // Main DMM logic variables.
   DMM *dmm_;
   Trigger *trigger_;
-  ReaderThread *reader_thread_;
 
+  // Reader threads routines.
+  ReaderThread *reader_thread_;
+  QTimer timer_;
+
+  // Interface elements.
   QLabel *value_display_label_;
   QAction *connect_action_;
+  QComboBox *device_chooser_;
   GraphWidget *graph_display_;
   QTableWidget *values_table_;
-  QTimer timer_;
 };
 #endif
