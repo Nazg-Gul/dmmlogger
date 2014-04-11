@@ -15,6 +15,7 @@
 #include <QWidget>
 
 #include "dmm/dmm.h"
+#include "dmm/dmm_factory.h"
 #include "dmm/trigger.h"
 #include "ui/graph_widget.h"
 #include "ui/reader_thread.h"
@@ -30,6 +31,7 @@ class MainWindow : public QMainWindow {
   void HandleTimer(void);
 
  private:
+  void FillModelsList(void);
   void CreateToolBar(void);
   QWidget *CreateCentralWidget(void);
 
@@ -40,6 +42,7 @@ class MainWindow : public QMainWindow {
   void LogState(const DMMState &state);
 
   // Main DMM logic variables.
+  DMMFactory dmm_factory_;
   DMM *dmm_;
   Trigger *trigger_;
 
@@ -51,6 +54,7 @@ class MainWindow : public QMainWindow {
   QLabel *value_display_label_;
   QAction *connect_action_;
   QComboBox *device_chooser_;
+  QComboBox *model_chooser_;
   GraphWidget *graph_display_;
   QTableWidget *values_table_;
 };

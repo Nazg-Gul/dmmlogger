@@ -16,6 +16,8 @@ if(MSVC)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/bin)
 endif()
 
+OPTION(WITH_DUMMY_DMM "Use the dummy DMM substitution for debug" OFF)
+
 include_directories(.)
 
 add_subdirectory(dmm)

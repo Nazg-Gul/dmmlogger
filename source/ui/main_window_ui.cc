@@ -10,9 +10,24 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+void MainWindow::FillModelsList(void) {
+  std::vector<DMMFactory::DMMModel> models = dmm_factory_.GetModels();
+  for (int i = 0; i < models.size(); ++i) {
+    DMMFactory::DMMModel &model = models[i];
+    model_chooser_->addItem(QString(model.name.c_str()),
+                            QVariant(static_cast<int>(model.type)));
+  }
+  // TODO(sergey): Restore previously used multimeter.
+}
+
 void MainWindow::CreateToolBar(void) {
   // Create tool bar itself.
   QToolBar *toolbar = addToolBar("Main Toolbar");
+
+  // Drop-down list for the DMM model selection.
+  model_chooser_ = new QComboBox();
+  toolbar->addWidget(model_chooser_);
+  FillModelsList();
 
   // Drop-down list for the device selection.
   device_chooser_ = new QComboBox();

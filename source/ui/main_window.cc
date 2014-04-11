@@ -9,9 +9,6 @@
 #include <QAction>
 #include <QPainter>
 
-#include "dmm/dummy_dmm.h"
-#include "dmm/ut60e.h"
-
 #include "dmm/continuous_trigger.h"
 #include "dmm/settle_trigger.h"
 
@@ -65,9 +62,16 @@ void MainWindow::HandleTimer(void) {
 
 void MainWindow::ConnectToDMM(void) {
   assert(dmm_ == NULL);
-  dmm_ = new UT60E(device_chooser_->currentText().toStdString());
-
-  // dmm_ = new DummyDMM();
+  int current_model_index = model_chooser_->currentIndex();
+  QVariant model_type_variant = model_chooser_->itemData(current_model_index);
+  DMMFactory::DMMModelType model_type =
+    (DMMFactory::DMMModelType)model_type_variant.toInt();
+  std::string device = device_chooser_->currentText().toStdString();
+  dmm_ = dmm_factory_.CreateDMM(model_type, device);
+  if (dmm_ == NULL) {
+    assert(!"Factory should never return NULL");
+    return;
+  }
   if (!dmm_->Connect()) {
     // Error happened while connecting to the DMM.
     // TODO(sergey): Show error message.

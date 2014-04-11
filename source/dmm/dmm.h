@@ -1,4 +1,3 @@
-
 // DMMLogger - A logging software for digital multimeters
 // Copyright 2013 Sergey Sharybin. All rights reserved.
 //

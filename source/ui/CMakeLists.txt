@@ -15,6 +15,10 @@ SET(SRC
     main_window_ui.cc
     reader_thread.cc)
 
+if(WITH_DUMMY_DMM)
+  add_definitions(-DWITH_DUMMY_DMM)
+endif()
+
 QT4_WRAP_CPP(SRC
              main_window.h)
 QT4_ADD_RESOURCES(SRC dmmlogger.qrc)

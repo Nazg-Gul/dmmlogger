@@ -6,7 +6,7 @@
 set(SRC
     continuous_trigger.cc
     dmm.cc
-    dummy_dmm.cc
+    dmm_factory.cc
     port.cc
     serial_dmm.cc
     settle_trigger.cc
@@ -22,6 +22,16 @@ set(HDR
     settle_trigger.h
     trigger.h
     ut60e.h)
+
+if(WITH_DUMMY_DMM)
+  list(APPEND SRC
+    dummy_dmm.cc
+  )
+  list(APPEND HDR
+    dummy_dmm.h
+  )
+  add_definitions(-DWITH_DUMMY_DMM)
+endif()
 
 add_library(dmm ${SRC} ${HDR})
 
