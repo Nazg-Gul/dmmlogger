@@ -20,6 +20,17 @@ void MainWindow::FillModelsList(void) {
   // TODO(sergey): Restore previously used multimeter.
 }
 
+void MainWindow::FillTriggersList(void) {
+  std::vector<TriggerFactory::TriggerInfo> triggers =
+      trigger_factory_.GetTriggers();
+  for (int i = 0; i < triggers.size(); ++i) {
+    TriggerFactory::TriggerInfo &trigger = triggers[i];
+    trigger_chooser_->addItem(QString(trigger.name.c_str()),
+                              QVariant(static_cast<int>(trigger.type)));
+  }
+  // TODO(sergey): Restore previously used multimeter.
+}
+
 void MainWindow::CreateToolBar(void) {
   // Create tool bar itself.
   QToolBar *toolbar = addToolBar("Main Toolbar");
@@ -42,6 +53,11 @@ void MainWindow::CreateToolBar(void) {
   device_chooser_->setEditText("COM1");
   device_chooser_->setMinimumContentsLength(6);
 #endif
+
+  // Drop-down list for the trigger selection.
+  trigger_chooser_ = new QComboBox();
+  toolbar->addWidget(trigger_chooser_);
+  FillTriggersList();
 
   // TODO(sergey): Fill in the combo box with more choises.
   // TODO(sergey): Also support saving the last used device.
@@ -137,4 +153,5 @@ QWidget *MainWindow::CreateCentralWidget(void) {
 void MainWindow::SetDMMSettingsEnabled(bool enabled) {
   model_chooser_->setEnabled(enabled);
   device_chooser_->setEnabled(enabled);
+  trigger_chooser_->setEnabled(enabled);
 }

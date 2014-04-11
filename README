@@ -45,8 +45,6 @@ Different triggers are supported by the logger:
 * Settle trigger will wait the reading to settle before
   logging the value to the graph.
 
-Currently no configuration interface for this is ready as well.
-
 Problems
 --------
 

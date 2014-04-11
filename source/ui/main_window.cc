@@ -65,7 +65,7 @@ void MainWindow::ConnectToDMM(void) {
   int current_model_index = model_chooser_->currentIndex();
   QVariant model_type_variant = model_chooser_->itemData(current_model_index);
   DMMFactory::DMMModelType model_type =
-    (DMMFactory::DMMModelType)model_type_variant.toInt();
+      (DMMFactory::DMMModelType) model_type_variant.toInt();
   std::string device = device_chooser_->currentText().toStdString();
   dmm_ = dmm_factory_.CreateDMM(model_type, device);
   if (dmm_ == NULL) {
@@ -79,13 +79,18 @@ void MainWindow::ConnectToDMM(void) {
     dmm_ = NULL;
     return;
   }
+
+  // TODO(sergey): De-duplicate with DMM creation.
+  int current_trigger_index = trigger_chooser_->currentIndex();
+  QVariant trigger_type_variant =
+      trigger_chooser_->itemData(current_trigger_index);
+  TriggerFactory::TriggerType trigger_type =
+      (TriggerFactory::TriggerType) trigger_type_variant.toInt();
+  trigger_ = trigger_factory_.CreateTrigger(trigger_type);
+
   SetDMMSettingsEnabled(false);
-
-  trigger_ = new ContinuousTrigger();
-
   reader_thread_ = new ReaderThread(dmm_, trigger_);
   reader_thread_->start();
-
   timer_.start(100);
 }
 

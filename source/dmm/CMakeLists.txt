@@ -11,6 +11,7 @@ set(SRC
     serial_dmm.cc
     settle_trigger.cc
     trigger.cc
+    trigger_factory.cc
     ut60e.cc)
 
 set(HDR
@@ -21,6 +22,7 @@ set(HDR
     serial_dmm.h
     settle_trigger.h
     trigger.h
+    trigger_factory.h
     ut60e.h)
 
 if(WITH_DUMMY_DMM)
