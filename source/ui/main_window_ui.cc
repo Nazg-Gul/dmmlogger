@@ -12,7 +12,7 @@
 
 void MainWindow::FillModelsList(void) {
   std::vector<DMMFactory::DMMModel> models = dmm_factory_.GetModels();
-  for (int i = 0; i < models.size(); ++i) {
+  for (unsigned int i = 0; i < models.size(); ++i) {
     DMMFactory::DMMModel &model = models[i];
     model_chooser_->addItem(QString(model.name.c_str()),
                             QVariant(static_cast<int>(model.type)));
@@ -23,7 +23,7 @@ void MainWindow::FillModelsList(void) {
 void MainWindow::FillTriggersList(void) {
   std::vector<TriggerFactory::TriggerInfo> triggers =
       trigger_factory_.GetTriggers();
-  for (int i = 0; i < triggers.size(); ++i) {
+  for (unsigned int i = 0; i < triggers.size(); ++i) {
     TriggerFactory::TriggerInfo &trigger = triggers[i];
     trigger_chooser_->addItem(QString(trigger.name.c_str()),
                               QVariant(static_cast<int>(trigger.type)));
