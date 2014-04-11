@@ -133,3 +133,8 @@ QWidget *MainWindow::CreateCentralWidget(void) {
 
   return central_widget;
 }
+
+void MainWindow::SetDMMSettingsEnabled(bool enabled) {
+  model_chooser_->setEnabled(enabled);
+  device_chooser_->setEnabled(enabled);
+}

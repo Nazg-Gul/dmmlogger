@@ -34,6 +34,7 @@ class MainWindow : public QMainWindow {
   void FillModelsList(void);
   void CreateToolBar(void);
   QWidget *CreateCentralWidget(void);
+  void SetDMMSettingsEnabled(bool enabled);
 
   void ConnectToDMM(void);
   void DisconnectFromDMM(void);

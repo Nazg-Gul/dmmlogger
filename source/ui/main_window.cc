@@ -79,6 +79,7 @@ void MainWindow::ConnectToDMM(void) {
     dmm_ = NULL;
     return;
   }
+  SetDMMSettingsEnabled(false);
 
   trigger_ = new ContinuousTrigger();
 
@@ -99,6 +100,7 @@ void MainWindow::DisconnectFromDMM(void) {
   delete trigger_;
   trigger_ = NULL;
   dmm_ = NULL;
+  SetDMMSettingsEnabled(true);
 }
 
 void MainWindow::UpdateDisplay(const DMMState &state) {
