@@ -9,6 +9,10 @@ GraphWidget::GraphWidget(void) : x_(0.0f) {
   addGraph();
   xAxis->setRange(0, 250);
   yAxis->setRange(-50, 50);
+  xAxis->setTickLabels(false);
+
+  setInteraction(QCP::iRangeDrag, true);
+  setInteraction(QCP::iRangeZoom, true);
 }
 
 void GraphWidget::Clear(void) {
