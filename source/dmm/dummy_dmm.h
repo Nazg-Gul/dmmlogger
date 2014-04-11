@@ -13,11 +13,13 @@
 
 class DummyDMM : public DMM {
  public:
+  DummyDMM(void);
   bool Connect(void);
   void Disconnect(void);
 
  private:
   Result ReadMultimeter(DMMState *state);
+  bool is_first_reading_;
 };
 
 #endif

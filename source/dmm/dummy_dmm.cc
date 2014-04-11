@@ -5,6 +5,9 @@
 
 #include "dmm/dummy_dmm.h"
 
+DummyDMM::DummyDMM(void) : is_first_reading_(true) {
+}
+
 bool DummyDMM::Connect(void) {
   return true;
 }
@@ -20,14 +23,15 @@ Result DummyDMM::ReadMultimeter(DMMState *state) {
     SleepMilliseconds(20);
   }
   state->mode = VOLTAGE;
-  state-> current_type = DC;
+  state->current_type = DC;
   state->multiplier = UNITY;
   state->raw_value = 30.0f;
   state->value = 0.0f;
-  state->value_overflow = false;
+  state->value_overflow = is_first_reading_;
   state->beep = false;
   state->low_battery = false;
   state->hold = false;
   state->relative = false;
+  is_first_reading_ = false;
   return RESULT_OK;
 }
