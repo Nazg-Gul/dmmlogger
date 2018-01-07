@@ -10,7 +10,7 @@ It is not ready yet. If you're interested in contributing, see:
 
 The short story:
 
- $ git https://github.com/Nazg-Gul/dmmlogger
+ $ git clone https://github.com/Nazg-Gul/dmmlogger
  $ make
  $ bin-opt/bin/qt-dmmlogger
 
